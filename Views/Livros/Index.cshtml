@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Livro>
+
+<h2>Livros Disponíveis</h2>
+
+<table>
+    <tr>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Editora</th>
+        <th>Ano de Publicação</th>
+        <th>Status</th>
+    </tr>
+    @foreach (var livro in Model)
+    {
+        <tr>
+            <td>@livro.Titulo</td>
+            <td>@livro.Autor.Nome</td>
+            <td>@livro.Editora.Nome</td>
+            <td>@livro.AnoPublicacao</td>
+            <td>@(livro.Emprestado ? "Emprestado" : "Disponível")</td>
+        </tr>
+    }
+</table>

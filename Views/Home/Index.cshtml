@@ -1,0 +1,9 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <h2>@ViewData["Title"]</h2>
+    <p>Bem-vindo à página inicial da biblioteca.</p>
+    @Html.ActionLink("Ver Livros", "Index", "Livros")
+</div>
