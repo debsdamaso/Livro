@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using ProjetoLivro.Models;
 using System.Diagnostics;
 
@@ -30,3 +31,4 @@ namespace ProjetoLivro.Controllers
         }
     }
 }
+

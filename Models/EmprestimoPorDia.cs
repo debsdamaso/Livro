@@ -1,5 +1,4 @@
-﻿namespace ProjetoLivro.Models
-
+﻿namespace ProjetoBiblioteca.Models
 {
     public class EmprestimoPorDia : Emprestimo, IEmprestimo
     {

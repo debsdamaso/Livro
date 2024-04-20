@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjetoBiblioteca.Models;
 using ProjetoBiblioteca.Persistencia;
@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace ProjetoBiblioteca.Controllers
 {
-    public class LivrosController : Controller
+    public class UsuariosController : Controller
     {
         private readonly OracleFIAPDbContext _context;
 
-        public LivrosController(OracleFIAPDbContext context)
+        public UsuariosController(OracleFIAPDbContext context)
         {
             _context = context;
         }
 
-        // GET: Livros
+        // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Livros.ToListAsync());
+            return View(await _context.Usuarios.ToListAsync());
         }
 
-        // GET: Livros/Details/5
+        // GET: Usuarios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -30,36 +30,36 @@ namespace ProjetoBiblioteca.Controllers
                 return NotFound();
             }
 
-            var livro = await _context.Livros.FirstOrDefaultAsync(m => m.Id == id);
-            if (livro == null)
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Id == id);
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return View(livro);
+            return View(usuario);
         }
 
-        // GET: Livros/Create
+        // GET: Usuarios/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Livros/Create
+        // POST: Usuarios/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Titulo")] Livro livro)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Telefone")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(livro);
+                _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(livro);
+            return View(usuario);
         }
 
-        // GET: Livros/Edit/5
+        // GET: Usuarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -67,20 +67,20 @@ namespace ProjetoBiblioteca.Controllers
                 return NotFound();
             }
 
-            var livro = await _context.Livros.FindAsync(id);
-            if (livro == null)
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario == null)
             {
                 return NotFound();
             }
-            return View(livro);
+            return View(usuario);
         }
 
-        // POST: Livros/Edit/5
+        // POST: Usuarios/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo")] Livro livro)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Telefone")] Usuario usuario)
         {
-            if (id != livro.Id)
+            if (id != usuario.Id)
             {
                 return NotFound();
             }
@@ -89,12 +89,12 @@ namespace ProjetoBiblioteca.Controllers
             {
                 try
                 {
-                    _context.Update(livro);
+                    _context.Update(usuario);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LivroExists(livro.Id))
+                    if (!UsuarioExists(usuario.Id))
                     {
                         return NotFound();
                     }
@@ -105,10 +105,10 @@ namespace ProjetoBiblioteca.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(livro);
+            return View(usuario);
         }
 
-        // GET: Livros/Delete/5
+        // GET: Usuarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -116,30 +116,29 @@ namespace ProjetoBiblioteca.Controllers
                 return NotFound();
             }
 
-            var livro = await _context.Livros.FirstOrDefaultAsync(m => m.Id == id);
-            if (livro == null)
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Id == id);
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return View(livro);
+            return View(usuario);
         }
 
-        // POST: Livros/Delete/5
+        // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var livro = await _context.Livros.FindAsync(id);
-            _context.Livros.Remove(livro);
+            var usuario = await _context.Usuarios.FindAsync(id);
+            _context.Usuarios.Remove(usuario);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool LivroExists(int id)
+        private bool UsuarioExists(int id)
         {
-            return _context.Livros.Any(e => e.Id == id);
+            return _context.Usuarios.Any(e => e.Id == id);
         }
     }
 }
-
