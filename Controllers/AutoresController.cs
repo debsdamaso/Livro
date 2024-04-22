@@ -1,20 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ProjetoBiblioteca.Models;
-using ProjetoBiblioteca.Persistencia;
+using ProjetoLivro.Models;
+using ProjetoLivro.Persistencia;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjetoBiblioteca.Controllers
+namespace ProjetoLivro.Controllers
 {
-    public class AutoresController : Controller
+    public class AutoresController(OracleFIAPDbContext context) : Controller
     {
-        private readonly OracleFIAPDbContext _context;
-
-        public AutoresController(OracleFIAPDbContext context)
-        {
-            _context = context;
-        }
+        private readonly OracleFIAPDbContext _context = context;
 
         // GET: Autores
         public async Task<IActionResult> Index()

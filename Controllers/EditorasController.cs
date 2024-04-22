@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ProjetoBiblioteca.Models;
-using ProjetoBiblioteca.Persistencia;
+using ProjetoLivro.Models;
+using ProjetoLivro.Persistencia;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjetoBiblioteca.Controllers
+namespace ProjetoLivro.Controllers
 {
     public class EditorasController : Controller
     {
@@ -54,55 +54,6 @@ namespace ProjetoBiblioteca.Controllers
             {
                 _context.Add(editora);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(editora);
-        }
-
-        // GET: Editoras/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var editora = await _context.Editoras.FindAsync(id);
-            if (editora == null)
-            {
-                return NotFound();
-            }
-            return View(editora);
-        }
-
-        // POST: Editoras/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Endereco")] Editora editora)
-        {
-            if (id != editora.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(editora);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EditoraExists(editora.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 return RedirectToAction(nameof(Index));
             }
             return View(editora);

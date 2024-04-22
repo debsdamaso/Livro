@@ -1,17 +1,20 @@
-﻿namespace ProjetoBiblioteca.Models
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ProjetoLivro.Models
 {
-    public abstract class Emprestimo
+    [Table("Emprestimos")]
+    public class Emprestimo
     {
+        [Key]
         public int Id { get; set; }
-        public Livro Livro { get; set; }
+
+        [Required(ErrorMessage = "A data de empréstimo é obrigatória.")]
         public DateTime DataEmprestimo { get; set; }
 
-        protected Emprestimo(Livro livro, DateTime dataEmprestimo)
-        {
-            Livro = livro;
-            DataEmprestimo = dataEmprestimo;
-        }
+        public int LivroId { get; set; }
 
-        public abstract int CalcularDiasDeEmprestimo();
+        public virtual Livro Livro { get; set; }
     }
 }

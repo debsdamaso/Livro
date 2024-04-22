@@ -1,25 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ProjetoBiblioteca.Models;
-using ProjetoBiblioteca.Persistencia;
+using ProjetoLivro.Models;
+using ProjetoLivro.Persistencia;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjetoBiblioteca.Controllers
+namespace ProjetoLivro.Controllers
 {
-    public class UsuariosController : Controller
+    public class UsuarioController(OracleFIAPDbContext context) : Controller
     {
-        private readonly OracleFIAPDbContext _context;
-
-        public UsuariosController(OracleFIAPDbContext context)
-        {
-            _context = context;
-        }
+        private readonly OracleFIAPDbContext _context = context;
 
         // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Usuarios.ToListAsync());
+            return View(await _context.Usuario.ToListAsync());
         }
 
         // GET: Usuarios/Details/5
@@ -30,7 +25,7 @@ namespace ProjetoBiblioteca.Controllers
                 return NotFound();
             }
 
-            var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Id == id);
+            var usuario = await _context.Usuario.FirstOrDefaultAsync(m => m.Id == id);
             if (usuario == null)
             {
                 return NotFound();
@@ -67,7 +62,7 @@ namespace ProjetoBiblioteca.Controllers
                 return NotFound();
             }
 
-            var usuario = await _context.Usuarios.FindAsync(id);
+            var usuario = await _context.Usuario.FindAsync(id);
             if (usuario == null)
             {
                 return NotFound();
@@ -116,7 +111,7 @@ namespace ProjetoBiblioteca.Controllers
                 return NotFound();
             }
 
-            var usuario = await _context.Usuarios.FirstOrDefaultAsync(m => m.Id == id);
+            var usuario = await _context.Usuario.FirstOrDefaultAsync(m => m.Id == id);
             if (usuario == null)
             {
                 return NotFound();
@@ -130,15 +125,15 @@ namespace ProjetoBiblioteca.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var usuario = await _context.Usuarios.FindAsync(id);
-            _context.Usuarios.Remove(usuario);
+            var usuario = await _context.Usuario.FindAsync(id);
+            _context.Usuario.Remove(usuario);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UsuarioExists(int id)
         {
-            return _context.Usuarios.Any(e => e.Id == id);
+            return _context.Usuario.Any(e => e.Id == id);
         }
     }
 }

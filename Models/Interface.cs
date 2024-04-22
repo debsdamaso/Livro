@@ -1,4 +1,4 @@
-﻿namespace ProjetoBiblioteca.Models
+﻿namespace ProjetoLivro.Models
 {
     public interface IEmprestimo
     {

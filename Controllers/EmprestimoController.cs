@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ProjetoBiblioteca.Models;
-using ProjetoBiblioteca.Persistencia;
+using ProjetoLivro.Models;
+using ProjetoLivro.Persistencia;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjetoBiblioteca.Controllers
+namespace ProjetoLivro.Controllers
 {
     public class EmprestimosController : Controller
     {

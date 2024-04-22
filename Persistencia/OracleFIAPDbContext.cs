@@ -1,13 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using ProjetoBiblioteca.Models;
+using ProjetoLivro.Models;
 
-namespace ProjetoBiblioteca.Persistencia
+namespace ProjetoLivro.Persistencia
 {
-    public class OracleFIAPDbContext : DbContext
+    public class OracleFIAPDbContext(DbContextOptions<OracleFIAPDbContext> options) : DbContext(options)
     {
-        public OracleFIAPDbContext(DbContextOptions<OracleFIAPDbContext> options) : base(options)
-        {
-        }
+        internal object Usuario;
 
         public DbSet<Livro> Livros { get; set; }
         public DbSet<Autor> Autores { get; set; }
@@ -22,13 +20,13 @@ namespace ProjetoBiblioteca.Persistencia
             // Configuração de relacionamento 1..N entre Autor e Livro
             modelBuilder.Entity<Livro>()
                 .HasOne(l => l.Autor)
-                .WithMany(a => a.Livros)
+                .WithMany(a => a.Livro)
                 .HasForeignKey(l => l.AutorId);
 
             // Configuração de relacionamento 1..N entre Editora e Livro
             modelBuilder.Entity<Livro>()
                 .HasOne(l => l.Editora)
-                .WithMany(e => e.Livros)
+                .WithMany(e => e.Livro)
                 .HasForeignKey(l => l.EditoraId);
 
             // Configuração da chave primária para a entidade Autor
@@ -36,7 +34,7 @@ namespace ProjetoBiblioteca.Persistencia
 
             // Configuração de relacionamento 1..N entre Autor e Livro
             modelBuilder.Entity<Autor>()
-                .HasMany(a => a.Livros)
+                .HasMany(a => a.Livro)
                 .WithOne(l => l.Autor)
                 .HasForeignKey(l => l.AutorId);
 
@@ -45,7 +43,7 @@ namespace ProjetoBiblioteca.Persistencia
 
             // Configuração de relacionamento 1..N entre Editora e Livro
             modelBuilder.Entity<Editora>()
-                .HasMany(e => e.Livros)
+                .HasMany(e => e.Livro)
                 .WithOne(l => l.Editora)
                 .HasForeignKey(l => l.EditoraId);
 
