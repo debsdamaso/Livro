@@ -13,8 +13,17 @@ namespace ProjetoLivro.Models
         [Required(ErrorMessage = "A data de empréstimo é obrigatória.")]
         public DateTime DataEmprestimo { get; set; }
 
-        public int LivroId { get; set; }
+        public Livro Livro { get; set; }
 
-        public virtual Livro Livro { get; set; }
+        public Emprestimo()
+        {
+            // Construtor vazio necessário para o Entity Framework Core
+        }
+
+        public Emprestimo(Livro livro, DateTime dataEmprestimo)
+        {
+            Livro = livro;
+            DataEmprestimo = dataEmprestimo;
+        }
     }
 }

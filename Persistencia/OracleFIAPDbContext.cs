@@ -12,6 +12,8 @@ namespace ProjetoLivro.Persistencia
         public DbSet<Editora> Editoras { get; set; }
         public DbSet<Emprestimo> Emprestimos { get; set; }
 
+        public DbSet<Usuario> Usuarios { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configuração da chave primária para a entidade Livro
@@ -20,13 +22,13 @@ namespace ProjetoLivro.Persistencia
             // Configuração de relacionamento 1..N entre Autor e Livro
             modelBuilder.Entity<Livro>()
                 .HasOne(l => l.Autor)
-                .WithMany(a => a.Livro)
+                .WithMany(a => a.Livros)
                 .HasForeignKey(l => l.AutorId);
 
             // Configuração de relacionamento 1..N entre Editora e Livro
             modelBuilder.Entity<Livro>()
                 .HasOne(l => l.Editora)
-                .WithMany(e => e.Livro)
+                .WithMany(e => e.Livros)
                 .HasForeignKey(l => l.EditoraId);
 
             // Configuração da chave primária para a entidade Autor
@@ -34,7 +36,7 @@ namespace ProjetoLivro.Persistencia
 
             // Configuração de relacionamento 1..N entre Autor e Livro
             modelBuilder.Entity<Autor>()
-                .HasMany(a => a.Livro)
+                .HasMany(a => a.Livros)
                 .WithOne(l => l.Autor)
                 .HasForeignKey(l => l.AutorId);
 
@@ -43,7 +45,7 @@ namespace ProjetoLivro.Persistencia
 
             // Configuração de relacionamento 1..N entre Editora e Livro
             modelBuilder.Entity<Editora>()
-                .HasMany(e => e.Livro)
+                .HasMany(e => e.Livros)
                 .WithOne(l => l.Editora)
                 .HasForeignKey(l => l.EditoraId);
 
