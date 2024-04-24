@@ -8,20 +8,25 @@ namespace ProjetoLivro.Models
     public class EmprestimoPorDia : Emprestimo, IEmprestimo
     {
         [Key]
-        public int Id { get; set; }
+        public new int Id { get; set; }
 
         [Required(ErrorMessage = "A quantidade de dias do empréstimo é obrigatória.")]
         public int QuantidadeDias { get; set; }
 
+        // Correção: Inicializar a propriedade Livro no construtor
+        public Livro Livro { get; set; }
+
+        // Correção: Adicionar um construtor para inicializar a propriedade Livro
         public EmprestimoPorDia()
         {
-            // Construtor vazio necessário para o Entity Framework Core
+            Livro = new Livro(); // ou inicialize com o livro desejado
         }
 
-        // aceitar dois argumentos
+        // Correção: Modificar a assinatura do construtor para corresponder à classe base
         public EmprestimoPorDia(Livro livro, DateTime dataEmprestimo, int quantidadeDias) : base(livro, dataEmprestimo)
         {
             QuantidadeDias = quantidadeDias;
+            Livro = livro;
         }
 
         // Método para calcular a quantidade de dias do empréstimo
@@ -31,4 +36,6 @@ namespace ProjetoLivro.Models
         }
     }
 }
+
+
 
