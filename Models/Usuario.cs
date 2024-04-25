@@ -7,7 +7,7 @@ namespace ProjetoLivro.Models
     public class Usuario
     {
         [Key]
-        public int Id { get; set; }
+        public int IdUsuario { get; set; }
 
         [Required(ErrorMessage = "O nome do usuário é obrigatório.")]
         public string Nome { get; set; }

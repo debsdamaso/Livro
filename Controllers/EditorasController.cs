@@ -1,9 +1,12 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjetoLivro.Models;
 using ProjetoLivro.Persistencia;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProjetoLivro.Controllers
 {
@@ -19,7 +22,7 @@ namespace ProjetoLivro.Controllers
         // GET: Editoras
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Editoras.ToListAsync());
+            return View(await _context.Editora.ToListAsync());
         }
 
         // GET: Editoras/Details/5
@@ -30,7 +33,8 @@ namespace ProjetoLivro.Controllers
                 return NotFound();
             }
 
-            var editora = await _context.Editoras.FirstOrDefaultAsync(m => m.Id == id);
+            var editora = await _context.Editora
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (editora == null)
             {
                 return NotFound();
@@ -46,14 +50,67 @@ namespace ProjetoLivro.Controllers
         }
 
         // POST: Editoras/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Endereco")] Editora editora)
+        public async Task<IActionResult> Create([Bind("Id,Nome")] Editora editora)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(editora);
                 await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(editora);
+        }
+
+        // GET: Editoras/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var editora = await _context.Editora.FindAsync(id);
+            if (editora == null)
+            {
+                return NotFound();
+            }
+            return View(editora);
+        }
+
+        // POST: Editoras/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] Editora editora)
+        {
+            if (id != editora.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(editora);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EditoraExists(editora.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(editora);
@@ -67,7 +124,8 @@ namespace ProjetoLivro.Controllers
                 return NotFound();
             }
 
-            var editora = await _context.Editoras.FirstOrDefaultAsync(m => m.Id == id);
+            var editora = await _context.Editora
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (editora == null)
             {
                 return NotFound();
@@ -81,15 +139,19 @@ namespace ProjetoLivro.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var editora = await _context.Editoras.FindAsync(id);
-            _context.Editoras.Remove(editora);
+            var editora = await _context.Editora.FindAsync(id);
+            if (editora != null)
+            {
+                _context.Editora.Remove(editora);
+            }
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EditoraExists(int id)
         {
-            return _context.Editoras.Any(e => e.Id == id);
+            return _context.Editora.Any(e => e.Id == id);
         }
     }
 }

@@ -10,22 +10,22 @@ using ProjetoLivro.Persistencia;
 
 namespace ProjetoLivro.Controllers
 {
-    public class AutoresController : Controller
+    public class UsuariosController : Controller
     {
         private readonly OracleFIAPDbContext _context;
 
-        public AutoresController(OracleFIAPDbContext context)
+        public UsuariosController(OracleFIAPDbContext context)
         {
             _context = context;
         }
 
-        // GET: Autores
+        // GET: Usuarios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Autor.ToListAsync());
+            return View(await _context.Usuarios.ToListAsync());
         }
 
-        // GET: Autores/Details/5
+        // GET: Usuarios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace ProjetoLivro.Controllers
                 return NotFound();
             }
 
-            var autor = await _context.Autor
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (autor == null)
+            var usuario = await _context.Usuarios
+                .FirstOrDefaultAsync(m => m.IdUsuario == id);
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return View(autor);
+            return View(usuario);
         }
 
-        // GET: Autores/Create
+        // GET: Usuarios/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Autores/Create
+        // POST: Usuarios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome")] Autor autor)
+        public async Task<IActionResult> Create([Bind("IdUsuario,Nome,Email,Telefone")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(autor);
+                _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(autor);
+            return View(usuario);
         }
 
-        // GET: Autores/Edit/5
+        // GET: Usuarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace ProjetoLivro.Controllers
                 return NotFound();
             }
 
-            var autor = await _context.Autor.FindAsync(id);
-            if (autor == null)
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario == null)
             {
                 return NotFound();
             }
-            return View(autor);
+            return View(usuario);
         }
 
-        // POST: Autores/Edit/5
+        // POST: Usuarios/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] Autor autor)
+        public async Task<IActionResult> Edit(int id, [Bind("IdUsuario,Nome,Email,Telefone")] Usuario usuario)
         {
-            if (id != autor.Id)
+            if (id != usuario.IdUsuario)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace ProjetoLivro.Controllers
             {
                 try
                 {
-                    _context.Update(autor);
+                    _context.Update(usuario);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AutorExists(autor.Id))
+                    if (!UsuarioExists(usuario.IdUsuario))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace ProjetoLivro.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(autor);
+            return View(usuario);
         }
 
-        // GET: Autores/Delete/5
+        // GET: Usuarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +124,34 @@ namespace ProjetoLivro.Controllers
                 return NotFound();
             }
 
-            var autor = await _context.Autor
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (autor == null)
+            var usuario = await _context.Usuarios
+                .FirstOrDefaultAsync(m => m.IdUsuario == id);
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return View(autor);
+            return View(usuario);
         }
 
-        // POST: Autores/Delete/5
+        // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var autor = await _context.Autor.FindAsync(id);
-            if (autor != null)
+            var usuario = await _context.Usuarios.FindAsync(id);
+            if (usuario != null)
             {
-                _context.Autor.Remove(autor);
+                _context.Usuarios.Remove(usuario);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AutorExists(int id)
+        private bool UsuarioExists(int id)
         {
-            return _context.Autor.Any(e => e.Id == id);
+            return _context.Usuarios.Any(e => e.IdUsuario == id);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oracle.EntityFrameworkCore.Metadata;
 using ProjetoLivro.Persistencia;
@@ -11,9 +12,11 @@ using ProjetoLivro.Persistencia;
 namespace ProjetoLivro.Migrations
 {
     [DbContext(typeof(OracleFIAPDbContext))]
-    partial class OracleFIAPDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240425173715_TB_RELACIONADAS")]
+    partial class TB_RELACIONADAS
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
