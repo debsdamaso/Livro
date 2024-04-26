@@ -25,7 +25,7 @@ namespace ProjetoLivro.Controllers
             return View(await _context.Editora.ToListAsync());
         }
 
-        // GET: Editoras/Details/5
+        // GET: Editoras/Details/
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -50,8 +50,7 @@ namespace ProjetoLivro.Controllers
         }
 
         // POST: Editoras/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nome")] Editora editora)
@@ -65,7 +64,7 @@ namespace ProjetoLivro.Controllers
             return View(editora);
         }
 
-        // GET: Editoras/Edit/5
+        // GET: Editoras/Edit/
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,9 +80,8 @@ namespace ProjetoLivro.Controllers
             return View(editora);
         }
 
-        // POST: Editoras/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Editoras/Edit/
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] Editora editora)
@@ -116,7 +114,7 @@ namespace ProjetoLivro.Controllers
             return View(editora);
         }
 
-        // GET: Editoras/Delete/5
+        // GET: Editoras/Delete/
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +132,7 @@ namespace ProjetoLivro.Controllers
             return View(editora);
         }
 
-        // POST: Editoras/Delete/5
+        // POST: Editoras/Delete/
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

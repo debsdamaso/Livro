@@ -17,7 +17,7 @@ namespace ProjetoLivro.Models
 
         public Emprestimo()
         {
-            // Construtor vazio necessário para o Entity Framework Core
+            
         }
 
         public Emprestimo(Livro livro, DateTime dataEmprestimo)

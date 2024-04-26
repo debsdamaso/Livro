@@ -26,7 +26,7 @@ namespace ProjetoLivro.Controllers
             return View(await oracleFIAPDbContext.ToListAsync());
         }
 
-        // GET: Livros/Details/5
+        // GET: Livros/Details/
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -55,8 +55,7 @@ namespace ProjetoLivro.Controllers
         }
 
         // POST: Livros/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Titulo,AnoPublicacao,Emprestado,AutorId,EditoraId")] Livro livro)
@@ -90,9 +89,7 @@ namespace ProjetoLivro.Controllers
             return View(livro);
         }
 
-        // POST: Livros/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Livros/Edit/
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,AnoPublicacao,Emprestado,AutorId,EditoraId")] Livro livro)
@@ -127,7 +124,7 @@ namespace ProjetoLivro.Controllers
             return View(livro);
         }
 
-        // GET: Livros/Delete/5
+        // GET: Livros/Delete/
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -147,7 +144,7 @@ namespace ProjetoLivro.Controllers
             return View(livro);
         }
 
-        // POST: Livros/Delete/5
+        // POST: Livros/Delete/
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

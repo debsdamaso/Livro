@@ -29,7 +29,7 @@ namespace ProjetoLivro.Models
         [ForeignKey("EditoraId")]
         public virtual Editora Editora { get; set; }
 
-        // Corrigindo o tipo da coleção para usar EmprestimoPorDia
+        
         public virtual ICollection<EmprestimoPorDia> Emprestimos { get; set; }
     }
 }

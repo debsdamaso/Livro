@@ -25,7 +25,7 @@ namespace ProjetoLivro.Controllers
             return View(await _context.Autor.ToListAsync());
         }
 
-        // GET: Autores/Details/5
+        // GET: Autores/Details/
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -50,8 +50,7 @@ namespace ProjetoLivro.Controllers
         }
 
         // POST: Autores/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nome")] Autor autor)
@@ -65,7 +64,7 @@ namespace ProjetoLivro.Controllers
             return View(autor);
         }
 
-        // GET: Autores/Edit/5
+        // GET: Autores/Edit/
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,9 +80,8 @@ namespace ProjetoLivro.Controllers
             return View(autor);
         }
 
-        // POST: Autores/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Autores/Edit/
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] Autor autor)
@@ -116,7 +114,7 @@ namespace ProjetoLivro.Controllers
             return View(autor);
         }
 
-        // GET: Autores/Delete/5
+        // GET: Autores/Delete/
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +132,7 @@ namespace ProjetoLivro.Controllers
             return View(autor);
         }
 
-        // POST: Autores/Delete/5
+        // POST: Autores/Delete/
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

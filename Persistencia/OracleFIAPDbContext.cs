@@ -12,7 +12,7 @@ namespace ProjetoLivro.Persistencia
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configura??o da chave prim?ria para a entidade Livro
+            
             modelBuilder.Entity<Usuario>().HasKey(l => l.IdUsuario);
        
         }
